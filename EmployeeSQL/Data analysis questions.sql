@@ -14,15 +14,10 @@ WHERE hire_date BETWEEN '1986-01-01' AND '1986-12-31';
 --List the manager of each department along with their department number, 
 --department name, employee number, last name, and first name (2 points)
 
-SELECT 
-    m.first_name || ' ' || m.last_name AS manager_name,dm.dept_no, d.dept_name,e.emp_no AS employee_emp_no, e.last_name AS employee_last_name,
-	e.first_name AS employee_first_name
-	
-FROM dept_manager AS dm
-INNER JOIN departments AS d ON dm.dept_no = d.dept_no 
-INNER JOIN dept_emp AS de ON de.dept_no = dm.dept_no  
-INNER JOIN employees AS e ON de.emp_no = e.emp_no  
-INNER JOIN employees AS m ON dm.emp_no = m.emp_no;  
+SELECT dm.dept_no, d.dept_name, e.emp_no, e.first_name || ' ' || e.last_name AS manager_name
+FROM dept_manager dm
+INNER JOIN employees e ON dm.emp_no = e.emp_no
+INNER JOIN departments d ON dm.dept_no = d.dept_no;
 
 
 
